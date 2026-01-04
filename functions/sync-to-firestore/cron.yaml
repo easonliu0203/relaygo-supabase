@@ -1,0 +1,16 @@
+# Supabase Edge Function Cron Job 配置
+# 定期執行 sync-to-firestore 函數，消費 outbox 事件佇列
+
+# ⚠️ 測試環境配置：每 5 秒執行一次（快速驗證同步結果）
+# 🚨 正式環境請改回：*/30 * * * * *（每 30 秒）
+- name: sync-orders-to-firestore
+  schedule: "*/5 * * * * *"  # 每 5 秒（測試用）
+  function: sync-to-firestore
+  description: "同步訂單變更到 Firestore（Outbox Pattern）- 測試環境高頻率"
+
+# 每天凌晨 2 點清理舊事件（保留最近 7 天）
+- name: cleanup-old-outbox-events
+  schedule: "0 2 * * *"  # 每天 02:00
+  function: cleanup-outbox
+  description: "清理 7 天前的已處理 outbox 事件"
+

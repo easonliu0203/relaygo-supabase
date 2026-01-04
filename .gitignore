@@ -1,0 +1,48 @@
+# Supabase
+.branches/
+.temp/
+.env
+.env.local
+
+# Node modules
+node_modules/
+functions/node_modules/
+
+# Environment variables
+*.env
+*.env.local
+.runtimeconfig.json
+
+# Service account keys (NEVER commit these!)
+*-firebase-adminsdk-*.json
+serviceAccountKey.json
+service-account.json
+*service-account*.json
+
+# API Keys and secrets
+*secret*
+*key.json
+*.pem
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Build outputs
+dist/
+build/
+
+# Test coverage
+coverage/
+
+# Temporary files
+*.tmp
+
