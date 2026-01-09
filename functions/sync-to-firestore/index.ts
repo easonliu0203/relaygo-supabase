@@ -323,6 +323,15 @@ async function syncBookingToFirestore(event: OutboxEvent): Promise<void> {
     tourPackageId: bookingData.tourPackageId || null,
     tourPackageName: bookingData.tourPackageName || null,
 
+    // ✅ 新增：優惠碼相關資訊
+    promoCode: bookingData.promoCode || null,
+    influencerId: bookingData.influencerId || null,
+    influencerCommission: bookingData.influencerCommission || 0,
+    originalPrice: bookingData.originalPrice || null,
+    discountAmount: bookingData.discountAmount || 0,
+    finalPrice: bookingData.finalPrice || null,
+    taxId: bookingData.taxId || null,
+
     // 費用資訊
     estimatedFare: bookingData.totalAmount || 0,
     depositAmount: bookingData.depositAmount || 0,
