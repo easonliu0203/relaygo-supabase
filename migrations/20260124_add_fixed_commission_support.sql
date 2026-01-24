@@ -1,6 +1,10 @@
 -- Migration: 新增固定金額分潤支援
 -- Date: 2026-01-24
 -- Description: 為 bookings 和 promo_code_usage 表新增固定金額佣金欄位，並更新觸發器函數
+-- 支援三種佣金模式：
+--   1. 僅固定金額 (commission_type = 'fixed')
+--   2. 僅百分比 (commission_type = 'percent')
+--   3. 兩者同時啟用 (commission_type = 'both')
 
 -- ============================================================================
 -- 1. 修改 bookings 表 - 新增固定金額分潤相關欄位
