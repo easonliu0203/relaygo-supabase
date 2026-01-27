@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS revenue_share_configs (
   description TEXT,                               -- 配置說明
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  created_by UUID REFERENCES users(id),
-  updated_by UUID REFERENCES users(id),
+  created_by VARCHAR(255),                        -- 修改為 VARCHAR 以支援用戶名稱或 ID
+  updated_by VARCHAR(255),                        -- 修改為 VARCHAR 以支援用戶名稱或 ID
   
   -- 唯一約束: 同一組合只能有一個啟用的配置
   CONSTRAINT unique_active_config UNIQUE (country, region, service_type, has_promo_code, is_active)
