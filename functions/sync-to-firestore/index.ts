@@ -332,6 +332,10 @@ async function syncBookingToFirestore(event: OutboxEvent): Promise<void> {
     finalPrice: bookingData.finalPrice || null,
     taxId: bookingData.taxId || null,
 
+    // ✅ 訂單維度資訊（用於多維度分潤配置）
+    country: bookingData.country || 'TW',  // 國家代碼（預設台灣）
+    serviceType: bookingData.serviceType || 'charter',  // 服務類型（charter=包車旅遊, instant_ride=即時派車）
+
     // 費用資訊
     estimatedFare: bookingData.totalAmount || 0,
     depositAmount: bookingData.depositAmount || 0,
