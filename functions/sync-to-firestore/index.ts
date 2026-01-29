@@ -273,8 +273,9 @@ async function syncBookingToFirestore(event: OutboxEvent): Promise<void> {
   }
 
   // 處理 GeoPoint（從 Supabase 的 location 格式轉換）
-  const pickupLocation = bookingData.pickupLocation || { latitude: 25.0330, longitude: 121.5654 }  // 預設台北
-  const dropoffLocation = { latitude: 25.0330, longitude: 121.5654 }  // 預設台北
+  // ✅ 修復：使用 payload 中的座標，不再使用硬編碼預設值
+  const pickupLocation = bookingData.pickupLocation || null
+  const dropoffLocation = bookingData.dropoffLocation || null  // ✅ 新增：從 payload 讀取 dropoff 座標
 
   // 轉換資料格式為客戶端 App 期望的格式
   const firestoreData = {
@@ -295,15 +296,17 @@ async function syncBookingToFirestore(event: OutboxEvent): Promise<void> {
 
     // 地點資訊
     pickupAddress: bookingData.pickupAddress || '',
-    pickupLocation: {
+    // ✅ 修復：處理座標可能為 null 的情況
+    pickupLocation: pickupLocation ? {
       _latitude: pickupLocation.latitude,
       _longitude: pickupLocation.longitude,
-    },
+    } : null,
     dropoffAddress: bookingData.destination || '',
-    dropoffLocation: {
+    // ✅ 修復：使用 payload 中的 dropoff 座標
+    dropoffLocation: dropoffLocation ? {
       _latitude: dropoffLocation.latitude,
       _longitude: dropoffLocation.longitude,
-    },
+    } : null,
 
     // 時間資訊（使用 _timestamp 標記，convertToFirestoreFields 會轉換為 Firestore Timestamp）
     bookingTime: {
