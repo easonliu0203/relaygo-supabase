@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "locales": [
+    { "code": "zh_TW", "name": "繁體中文", "flag": "🇹🇼", "version": 1 },
+    { "code": "zh_CN", "name": "简体中文", "flag": "🇨🇳", "version": 1 },
+    { "code": "en_US", "name": "English",  "flag": "🇺🇸", "version": 1 },
+    { "code": "ja_JP", "name": "日本語",   "flag": "🇯🇵", "version": 1 },
+    { "code": "ko_KR", "name": "한국어",   "flag": "🇰🇷", "version": 1 },
+    { "code": "th_TH", "name": "ภาษาไทย",  "flag": "🇹🇭", "version": 1 },
+    { "code": "ms_MY", "name": "Bahasa Melayu", "flag": "🇲🇾", "version": 1 }
+  ]
+}
