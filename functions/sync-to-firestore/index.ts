@@ -344,8 +344,17 @@ async function syncBookingToFirestore(event: OutboxEvent): Promise<void> {
     depositAmount: bookingData.depositAmount || 0,
     overtimeFee: bookingData.overtimeFee || 0,  // ✅ 添加超時費用
     tipAmount: bookingData.tipAmount || 0,  // ✅ 添加小費金額
+    // ✅ 司機實得小費（已扣金流手續費）。費率為訂單快照，現金小費為 0%。
+    //    此金額已包含在 driverEarning 內，顯示時不要再自行乘上 0.97。
+    tipAfterFee: bookingData.tipAfterFee || 0,
+    tipFeePercentage: bookingData.tipFeePercentage || 0,
     platformFee: bookingData.platformFee || 0,  // ✅ 添加平台抽成
     driverEarning: bookingData.driverEarning || 0,  // ✅ 添加司機收入
+    // ✅ 活動單（固定給付）用：司機端需要說明為何收入不是總額的固定比例
+    driverPayoutMode: bookingData.driverPayoutMode || 'percent',
+    driverFixedAmount: bookingData.driverFixedAmount || 0,
+    driverSharePercentage: bookingData.driverSharePercentage || 0,
+    charterSurcharge: bookingData.charter_surcharge || 0,  // ✅ 跨區接送費快照
     depositPaid: false,
 
     // 狀態映射：將 Supabase 狀態轉換為 Flutter APP 期望的狀態
